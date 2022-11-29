@@ -3,11 +3,17 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const iconv = require('iconv-lite'); //解決big5問題
 
 async function crawler(url){
-    const response = await fetch(url);
-    const body = response.rawBody;
-    console.log(body);
-    const utf8body = iconv.decode(Buffer.from(body), "big5")
-    console.log(utf8body);
+
+    const response = await fetch(url)
+    const buffer = await response.arrayBuffer()
+    const decoded = iconv.decode(Buffer.from(buffer), 'big5')
+    console.log(decoded)
+    // const $ = cheerio.load(decoded)    
+    // const response = await fetch(url);
+    // const body = response.rawBody;
+    // console.log(body);
+    // const utf8body = iconv.decode(Buffer.from(body), "big5")
+    // console.log(utf8body);
     // console.log(response);
     // const body = await response.text();
     // console.log(body);
