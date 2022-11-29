@@ -4,13 +4,13 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 
 
 async function crawler(url){
-    const results = []
     const response = await fetch(url);
     const body = await response.text();
     const $ = cheerio.load(body);
     let list = $('#areaList > table > tbody > tr')
     let region = $('body > div > div:nth-child(3) > div.col-sm-5.col-md-4 > h5').text().split(' ')[0]
     // console.log(region);
+    const results = []
     for(const i of list){
         results.push({
             "負責人姓名": $(i).find('small:nth-child(5)').text().trim().split('：')[1],
