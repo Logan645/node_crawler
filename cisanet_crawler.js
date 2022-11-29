@@ -12,16 +12,17 @@ async function crawlerPage(url){
         "公司網站":$('#main-content > div.container > div.row > div > div.page-list-act.row.no-gutters > div > ul > li:nth-child(1) > a').text().trim(),
         "聯絡電話":$('#main-content > div.container > div.row > div > div.page-list-act.row.no-gutters > div > ul > li:nth-child(2)').text().trim().split('：')[1].trim(),
         "傳真": $('#main-content > div.container > div.row > div > div.page-list-act.row.no-gutters > div > ul > li:nth-child(3)').text().trim().split('：')[1].trim(),
-        "公司簡介": $('#main-content > div.container > div.row > div > div:nth-child(4) > p').text().replace('\n',''),
-        "服務簡介": $('#main-content > div.container > div.row > div > div:nth-child(6) > p').text().replace('\n','')
+        // "公司簡介": $('#main-content > div.container > div.row > div > div:nth-child(4) > p').text().replace('\n',''),
+        // "服務簡介": $('#main-content > div.container > div.row > div > div:nth-child(6) > p').text().replace('\n','')
         })                
     }else{
         data.push({
             "公司名稱": $('#main-content > div.container > div.row > div > div.d-flex.bd-highlight.mb-3 > div.bd-highlight.page-title.pl-2.my-auto').text(),
+            "公司網站":"",
             "聯絡電話":$('#main-content > div.container > div.row > div > div.page-list-act.row.no-gutters > div > ul > li:nth-child(1)').text().trim().split('：')[1].trim(),
             "傳真": $('#main-content > div.container > div.row > div > div.page-list-act.row.no-gutters > div > ul > li:nth-child(2)').text().trim().split('：')[1].trim(),
-            "公司簡介": $('#main-content > div.container > div.row > div > div:nth-child(4) > p').text().replace('\n',''),
-            "服務簡介": $('#main-content > div.container > div.row > div > div:nth-child(6) > p').text().replace('\n','')
+            // "公司簡介": $('#main-content > div.container > div.row > div > div:nth-child(4) > p').text().replace('\n',''),
+            // "服務簡介": $('#main-content > div.container > div.row > div > div:nth-child(6) > p').text().replace('\n','')
             }) 
     }
     // console.log(JSON.stringify(data));
@@ -31,6 +32,7 @@ async function crawlerPage(url){
 
 async function getPageUrlList(){
     const urlList = []
+    //<112
     for (let page=1; page<112; page++){
         let url = 'https://www.cisanet.org.tw/eBook/_index';
         let config ={
@@ -62,12 +64,28 @@ async function main(){
     for(const url of urlList){
         results = results.concat(await crawlerPage(url))
     }
-    console.log(JSON.stringify(results));
+    // console.log(JSON.stringify(results));
+    // results = JSON.stringify(results);
+    return results
+    // const { Parser } = require('json2csv');
+    // const parserObj = new Parser();
+    // const csv = parserObj.parse(results)
+    // console.log(csv);
 }
-main()
-
+// main()
+const { Parser } = require('json2csv');
+async function jsonToCsv(){
+    let resultsJson = await main()
+    // console.log('resultsJson:',resultsJson);
+    const parserObj = new Parser();
+    const resultCsv = parserObj.parse(resultsJson)
+    console.log(resultCsv);
+}
+jsonToCsv()
 
 // urlList('https://www.cisanet.org.tw/eBook/Index')
+
+
 
 
 // async function crawlerPage(){
@@ -101,3 +119,5 @@ main()
 // }
 
 // crawlerPage()
+
+//node cisanet_crawler.js > results/cisanet_results.json
