@@ -66,11 +66,8 @@ async function main(){
     }
     // console.log(JSON.stringify(results));
     // results = JSON.stringify(results);
+    // JSON.stringify之後會是字串形式就不是陣列了
     return results
-    // const { Parser } = require('json2csv');
-    // const parserObj = new Parser();
-    // const csv = parserObj.parse(results)
-    // console.log(csv);
 }
 // main()
 const { Parser } = require('json2csv');

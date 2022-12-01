@@ -21,7 +21,7 @@ async function crawler(url){
 
 async function getUrlList(){
     const urlList = [];
-    for(let page=1; page<3; page++){
+    for(let page=1; page<50; page++){
         const response = await fetch(`https://ifoodie.tw/explore/list/%E5%AF%B5%E7%89%A9%E5%8F%8B%E5%96%84?page=${page}`);
         const body = await response.text();
         const $ = cheerio.load(body);
@@ -45,3 +45,4 @@ async function main(){
 }
 
 main()
+//node pet_friendly_restaurant.js > results/pet_friendly_restaurant.json 
