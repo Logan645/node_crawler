@@ -9,13 +9,15 @@ async function crawler(){
     let results = []
     for (let i of list){
         let info = $(i).find('td:nth-child(3)').text().trim().split('\n')
-        let tel = info[1]
-        // tel = tel.trim()
+        let tel = info[1]  //Optional chaining
+        tel = tel?.trim()
+        let address = info[2]
+        address =address?.trim()
         results.push({
             "公司名稱":$(i).find('td:nth-child(1) > a').text(),
             "聯絡人": info[0],
             "電話": tel,
-            "地址": info[2]
+            "地址": address
         })
     }
     // console.log(results);

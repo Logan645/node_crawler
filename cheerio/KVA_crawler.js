@@ -1,12 +1,14 @@
 const cheerio = require('cheerio'); //類似python的bs4;
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const iconv = require('iconv-lite'); //解決big5問題
 
 async function crawler(url){
-    const results = []
     const response = await fetch(url);
-    const body = await response.text();
-    const $ = cheerio.load(body);
+    const buffer = await response.arrayBuffer();
+    const decode = iconv.decode(Buffer.from(buffer), 'big5')
+    const $ = cheerio.load(decode);
     let list =$('body > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr > td:nth-child(1) > table:nth-child(4) > tbody > tr');
+    const results = []
     for(const i of list){
         console.log($(i).find('td:nth-child(3)').text());
         results.push({
