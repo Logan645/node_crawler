@@ -9,8 +9,8 @@ async function crawler(){
     let results = []
     for (let i of list){
         let info = $(i).find('td:nth-child(3)').text().trim().split('\n')
-        let tel = info[1]  //Optional chaining
-        tel = tel?.trim()
+        let tel = info[1]  
+        tel = tel?.trim() //Optional chaining確認該物件是存在
         let address = info[2]
         address =address?.trim()
         results.push({

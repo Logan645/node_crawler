@@ -3,5 +3,9 @@ node_modules
 results
 test.js
 test.txt
+test.json
 test.csv
 test.png
+.env
+test.html
+googleMapData_test.js

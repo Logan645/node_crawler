@@ -38,7 +38,8 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
         const body = await response.text()
         const $ = cheerio.load(body);
         const title = $('head > title').text();
-        const description = $('head > meta:nth-child(14)').attr('content')
+        const description = $('head > meta[name = description]').attr('content') 
+        // const description = $('head > meta:nth-child(14)').attr('content') 正確的
         // <meta name="description" content="GA4 是 Google Analytics 4 的縮寫。 GA4 結合了通用版 GA 和 GA4F 兩項產品， 新版 GA4 主打的就是能夠同時追蹤 APP + Web 數據，並將跨裝置的使用者行為串接起來。本篇文章將會提供 GA4 介紹 。">
         const content = $('#post-content').html();
         results.push({

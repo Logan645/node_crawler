@@ -1,31 +1,23 @@
-[
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600100',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600200',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600300',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600400',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600500',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600600',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600700',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600800',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6600900',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601000',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601100',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601200',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601300',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601400',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601500',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601600',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601700',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601800',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6601900',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602000',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602100',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602200',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602300',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602400',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602500',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602600',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602700',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602800',
-  'http://www.ctcvma.org.tw/Organizations?areaCode=6602900'
-]
+const puppeteer = require('puppeteer');
+const browser = await puppeteer.launch()
+const page = await browser.newPage()
+await page.goto('https://www.google.com.tw/maps/@25.0673356,121.5255704,15z')
+
+await page.setViewport({ width: 1512, height: 833 })
+
+await page.waitForSelector('#searchboxinput')
+await page.click('#searchboxinput')
+
+await page.waitForSelector('#searchboxinput')
+await page.click('#searchboxinput')
+
+await page.waitForSelector('.m6QErb > .etWJQ:nth-child(5) > .g88MCb > .DVeyrd > .EgL07d')
+await page.click('.m6QErb > .etWJQ:nth-child(5) > .g88MCb > .DVeyrd > .EgL07d')
+
+await page.waitForSelector('.kARmKf > .m6QErb > .m6QErb > .rgIZ6c > .YTfrze')
+await page.click('.kARmKf > .m6QErb > .m6QErb > .rgIZ6c > .YTfrze')
+
+await page.waitForSelector('.m6QErb > .m6QErb > .eNBuZ > .m5XrEc > .VVjj3')
+await page.click('.m6QErb > .m6QErb > .eNBuZ > .m5XrEc > .VVjj3')
+
+await browser.close()
