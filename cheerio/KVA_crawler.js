@@ -17,12 +17,17 @@ async function crawler(url){
     //用等差數列的思維去決定每一欄位要抓第幾個tr
     //i<list.length/3，可以剛好抓滿20筆資料
     for(let i=1; i<list.length/3; i++){
-        pageResults.push({
-            "負責人姓名": $(list[(i-1)*3]).find('td:nth-child(2) > a > font > b').text(),
-            "診療機構名稱": $(list[(i-1)*3]).find('td:nth-child(2) > b').text(),
-            "電話": $(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[0].replace('電話：',''),
-            "地址": $(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[1]
-        })
+        const address = $(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[1]
+        if( address != undefined & address!='' & address!='.' ){
+            pageResults.push({
+                "leader": $(list[(i-1)*3]).find('td:nth-child(2) > a > font > b').text(),
+                "hospital": $(list[(i-1)*3]).find('td:nth-child(2) > b').text(),
+                "tel": $(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[0].replace('電話：',''),
+                "address": $(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[1],
+            })
+        }
+        // console.log($(list[(i-1)*3+1]).find('td:nth-child(3)').text().trim().split('地址：')[1]);
+        
     }
     //嘗試打印出來，確認結果沒問題
     // console.log(pageResults);

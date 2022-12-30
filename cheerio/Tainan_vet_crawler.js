@@ -19,11 +19,16 @@ async function crawler(url){
             address = $(i).find('td:nth-child(2) a').attr('href')
             // console.log(address);
         }
+        let region = $(i).find('td:nth-child(3)').text().split('區')[0].slice(3)+'區';
+        if (region.length>3){
+            region = '地址錯誤'
+        }
         results.push({
-            "醫院名稱" : $(i).find('td:nth-child(1)').text(),
-            "網址": address,
-            "地址": $(i).find('td:nth-child(3)').text(),
-            "電話": $(i).find('td:nth-child(4)').text()
+            "hospital" : $(i).find('td:nth-child(1)').text(),
+            "website": address,
+            "address": $(i).find('td:nth-child(3)').text(),
+            "tel": $(i).find('td:nth-child(4)').text(),
+            "region": region
         })
     }
     // console.log(JSON.stringify(results));

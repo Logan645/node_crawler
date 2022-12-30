@@ -13,10 +13,11 @@ async function crawler(url){
     const results = []
     for(const i of list){
         results.push({
-            "負責人姓名": $(i).find('small:nth-child(5)').text().trim().split('：')[1],
-            "診療機構名稱": $(i).find('.h5').text().trim(),
-            "電話": $(i).find('small:nth-child(3)').text().trim(),
-            "地址": region + $(i).find('small:nth-child(1)').text().trim(),
+            "leader": $(i).find('small:nth-child(5)').text().trim().split('：')[1],
+            "hospital": $(i).find('.h5').text().trim(),
+            "tel": $(i).find('small:nth-child(3)').text().trim(),
+            "address": region + $(i).find('small:nth-child(1)').text().trim(),
+            "zone": region
         })
     }
     // console.log(JSON.stringify(results));
@@ -51,5 +52,4 @@ async function main(url){
 // getUrlList(url)
 let url = 'http://www.ctcvma.org.tw/Organizations?areaCode=6600500' //北屯區
 main(url)
-//node Taichung_vet_crawler.js > Taichung_vet_results.json
-//node Taichung_vet_crawler.js > test.txt
+//node cheerio/Taichung_vet_crawler.js > results/Taichung_vet_results.json

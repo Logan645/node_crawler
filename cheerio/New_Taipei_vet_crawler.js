@@ -13,9 +13,9 @@ async function crawler(url){
     if(list.length > 3){
         for(let i of list){
             results.push({
-                "院所名稱":$(i).find('td:nth-child(1)').text(),
-                "地址":$(i).find('td:nth-child(4)').text(),
-                "電話":$(i).find('td:nth-child(5)').text()
+                "hospital":$(i).find('td:nth-child(1)').text(),
+                "address":$(i).find('td:nth-child(4)').text(),
+                "tel":$(i).find('td:nth-child(5)').text()
             })
         } 
     }

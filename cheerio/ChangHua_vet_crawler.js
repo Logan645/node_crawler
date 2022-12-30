@@ -12,10 +12,11 @@ async function main(url){
     for(let i of list){
         results.push(
             {
-                "負責人姓名":$(i).find('td:nth-child(1)').text(),
-                "診療機構名稱":$(i).find('td:nth-child(2)').text(),
-                "電話":$(i).find('td:nth-child(3)').text(),
-                "地址":$(i).find('td:nth-child(4)').text(),
+                "leader":$(i).find('td:nth-child(1)').text(),
+                "hospital":$(i).find('td:nth-child(2)').text(),
+                "tel":$(i).find('td:nth-child(3)').text(),
+                "address":$(i).find('td:nth-child(4)').text(),
+                "region": $(i).find('td:nth-child(4)').text()[0]+ $(i).find('td:nth-child(4)').text()[1]+ $(i).find('td:nth-child(4)').text()[2]
             }
         )
     }
@@ -24,4 +25,4 @@ async function main(url){
 }
 
 main(url)
-//node ChangHua_vet_crawler.js > ChangHua_vet_results.json
+//node cheerio/ChangHua_vet_crawler.js > results/ChangHua_vet_results.json
